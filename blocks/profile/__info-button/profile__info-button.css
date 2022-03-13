@@ -1,0 +1,24 @@
+.profile__info-button {
+  display: inline;
+  margin-left: 18px;
+  width: 24px;
+  height: 24px;
+  background-color: #000000;
+  border: 1px solid #FFFFFF;
+  padding: 0;
+}
+
+.profile__info-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 602px) {
+  .profile__info-button {
+    margin-left: 10px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+

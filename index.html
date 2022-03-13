@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Место</title>
+  <link rel="stylesheet" href="pages/index.css">  
+</head>
+
+<body class="body">
+  <div class="page">
+    <header class="header">
+      <img src="images/logo-mesto.svg" class="header__logo" alt="Логотип">
+      <div class="header__line"></div>
+    </header>
+    
+    <main class="content">
+      <section class="profile" aria-label="profile">
+        <img src="images/avatar.png" class="profile__avatar" alt="avatar">
+        <div class="profile__info">
+          <p class="profile__name">Жак-Ив Кусто</p>
+          <button class="profile__info-button">
+            <img src="images/info-button.svg" class="profile__info-button-img" alt="Кнопка">
+          </button>
+          
+          <p class="profile__work">Иссдедователь океана</p>
+          
+        </div>
+        <button class="profile__add-button">
+          <img src="images/add-button.svg" class="profile__add-button-img" alt="Кнопка">
+        </button>
+      </section>
+      
+      <section class="" aria-label="elements">
+        <ul class="elements ul-none">
+          <li class="element__list">
+            <img src="images/karachaevsk.png" class="element__img" alt="фото">
+            <p class="element__item">Карачаевск
+              <button class="element__likee">
+                <img src="images/element-likee.svg" class="" alt="likee">
+              </button>
+            </p>
+          </li>
+          <li class="element__list">
+            <img src="images/elbrus.png" class="element__img" alt="фото">
+            <p class="element__item">Гора Эльбрус
+              <button class="element__likee">
+                <img src="images/element-likee.svg" class="" alt="likee">
+              </button>
+            </p>
+          </li>
+          <li class="element__list">
+            <img src="images/dombay.png" class="element__img" alt="фото">
+            <p class="element__item">Домбай
+              <button class="element__likee">
+                <img src="images/element-likee.svg" class="" alt="likee">
+              </button>
+            </p>
+          </li>
+          <li class="element__list">
+            <img src="images/elbrus.png" class="element__img" alt="фото">
+            <p class="element__item">Гора Эльбрус
+              <button class="element__likee">
+                <img src="images/element-likee.svg" class="" alt="likee">
+              </button>
+            </p>
+          </li>
+          <li class="element__list">
+            <img src="images/dombay.png" class="element__img" alt="фото">
+            <p class="element__item">Домбай
+              <button class="element__likee">
+                <img src="images/element-likee.svg" class="" alt="likee">
+              </button>
+            </p>
+          </li>
+          <li class="element__list">
+            <img src="images/karachaevsk.png" class="element__img" alt="фото">
+            <div class="element__item">
+              <p class="element__text">Карачаево-Черкесия</p>
+              <button class="element__likee">
+                <img src="images/element-likee.svg" class="" alt="likee">
+              </button>
+            </div>
+            
+          </li>
+          
+      </section>
+
+    </main>
+    
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+    </footer>
+  </div>
+  
+  <section class="popup">
+    <div class="form">
+      <button class="form__close">
+        <img src="images/form-close-icon.svg" class="form__close-img" alt="Close">
+      </button>
+      <form class="form__input">
+        <h2 class="form__heading">Редактировать профиль</h2>
+        <input class="form__text" type="text" >
+        <input class="form__text" type="text" >
+        <button class="form__save">
+            Сохранить
+        </button>
+      </form>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>

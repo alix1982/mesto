@@ -1,0 +1,29 @@
+.form__save {
+  margin: 18px auto 37px;
+  width: 358px;
+  height: 50px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.form__save:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 602px) {
+  .form__save {
+    width: 238px;
+    height: 46px;
+    margin: 18px auto 25px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

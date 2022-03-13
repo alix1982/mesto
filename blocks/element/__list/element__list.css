@@ -1,0 +1,8 @@
+.element__list {
+  width: 282px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 10px;
+  overflow: hidden;
+}

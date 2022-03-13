@@ -1,0 +1,13 @@
+.elements {
+  margin: 30px auto 65px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 602px) {
+  .elements {
+    justify-content: center;
+    margin: 36px auto 48px auto;
+  }
+}

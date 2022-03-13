@@ -1,0 +1,12 @@
+.element__likee {
+  display: inline;
+  padding: 0;
+  border: none;
+  background-color: #ffffff;
+}
+
+.element__likee:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
