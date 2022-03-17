@@ -12,34 +12,29 @@
   <div class="page">
     <header class="header">
       <img src="images/logo-mesto.svg" class="header__logo" alt="Логотип">
-      <div class="header__line"></div>
     </header>
     
     <main class="content">
-      <section class="profile" aria-label="profile">
+      <section class="profile" aria-label="профиль">
         <img src="images/avatar.png" class="profile__avatar" alt="аватар">
         <div class="profile__info">
-          <p class="profile__name">Жак-Ив Кусто</p>
-          <button class="profile__info-button">
-            <img src="images/info-button.svg" class="profile__info-button-img" alt="Кнопка">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__info-button" type="button">
           </button>
-          
           <p class="profile__work">Иссдедователь океана</p>
           
         </div>
-        <button class="profile__add-button">
-          <img src="images/add-button.svg" class="profile__add-button-img" alt="Кнопка">
+        <button class="profile__add-button" type="button">
         </button>
       </section>
       
-      <section class="" aria-label="elements">
+      <section aria-label="галерея">
         <ul class="element ul-none">
           <li class="element__list">
             <img src="images/karachaevsk.png" class="element__img" alt="фото">
             <div class="element__item">
               <p class="element__text">Карачаевск</p>
-              <button class="element__likee">
-                <img src="images/element-likee.svg" class="" alt="лайк">
+              <button class="element__like" type="button">
               </button>
             </div>
           </li>
@@ -47,8 +42,7 @@
             <img src="images/elbrus.png" class="element__img" alt="фото">
             <div class="element__item">
               <p class="element__text">Гора Эльбрус</p>
-              <button class="element__likee">
-                <img src="images/element-likee.svg" class="" alt="лайк">
+              <button class="element__like" type="button">
               </button>
             </div>
           </li>
@@ -56,8 +50,7 @@
             <img src="images/dombay.png" class="element__img" alt="фото">
             <div class="element__item">
               <p class="element__text">Домбай</p>
-              <button class="element__likee">
-                <img src="images/element-likee.svg" class="" alt="лайк">
+              <button class="element__like" type="button">
               </button>
             </div>
           </li>
@@ -65,8 +58,7 @@
             <img src="images/elbrus.png" class="element__img" alt="фото">
             <div class="element__item">
               <p class="element__text">Гора Эльбрус</p>
-              <button class="element__likee">
-                <img src="images/element-likee.svg" class="" alt="лайк">
+              <button class="element__like" type="button">
               </button>
             </div>
           </li>
@@ -74,8 +66,7 @@
             <img src="images/dombay.png" class="element__img" alt="фото">
             <div class="element__item">
               <p class="element__text">Домбай</p>
-              <button class="element__likee">
-                <img src="images/element-likee.svg" class="" alt="лайк">
+              <button class="element__like" type="button">
               </button>
             </div>
           </li>
@@ -83,8 +74,7 @@
             <img src="images/karachaevsk.png" class="element__img" alt="фото">
             <div class="element__item">
               <p class="element__text">Карачаево-Черкесия</p>
-              <button class="element__likee">
-                <img src="images/element-likee.svg" class="" alt="лайк">
+              <button class="element__like" type="button">
               </button>
             </div>
           </li>
@@ -94,25 +84,24 @@
     </main>
     
     <footer class="footer">
-      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+      <p>&copy; 2022 Mesto Russia</p>
     </footer>
   </div>
   
   <section class="popup">
-    <div class="form">
-      <button class="form__close">
-        <img src="images/form-close-icon.svg" class="form__close-img" alt="Закрыть">
+    <div class="popup__cell">
+      <button class="popup__close">
       </button>
-      <form class="form__input">
-        <h2 class="form__heading">Редактировать профиль</h2>
-        <input class="form__text" type="text" >
-        <input class="form__text" type="text" >
+      <form class="form" name="форма">
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <input class="form__text" type="text" name="имя" placeholder="Жак-Ив Кусто">
+        <input class="form__text" type="text" name="деятельность" placeholder="Иссдедователь океана">
         <button class="form__save">
             Сохранить
         </button>
       </form>
     </div>
   </section>
-  <script src="script.js"></script>
+  <script src="scripts/script.js"></script>
 </body>
 </html>

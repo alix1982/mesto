@@ -1,4 +1,4 @@
-.elements {
+.element {
   margin: 30px auto 65px auto;
   display: flex;
   justify-content: space-between;
@@ -6,8 +6,8 @@
 }
 
 @media screen and (max-width: 602px) {
-  .elements {
+  .element {
     justify-content: center;
-    margin: 36px auto 48px auto;
+    margin: 16px auto 48px auto;
   }
 }

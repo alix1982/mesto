@@ -1,24 +1,21 @@
 .form__text {
   margin: 0 auto;
-  margin-bottom: 30px;
-  padding-bottom: 7px;
+  margin-bottom: 25px;
+  padding-bottom: 4px;
   width: 358px;
   height: 27px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  font-family: 'Inter';
+  font-family: Inter, Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
 
-.form__text: last-child {
-  margin-bottom: 0;
-}
-
 @media screen and (max-width: 602px) {
   .form__text {
     width: 238px;
+    margin-bottom: 22px;
   }
 }

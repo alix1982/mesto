@@ -1,0 +1,25 @@
+.popup__cell {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  position: absolute;
+  top: 20%;
+  left: 28%;
+  min-height: 345px;
+}
+
+@media screen and (max-width: 602px) {
+  .popup__cell {
+    width: 282px;
+    top: 12.5%;
+    left: 5%;
+    min-height: 322px;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .popup__cell {
+    right: 5%;
+  }
+}

@@ -1,12 +1,12 @@
 .form__save {
-  margin: 18px auto 37px;
+  margin: 23px auto 37px;
   width: 358px;
-  height: 50px;
+  min-height: 50px;
   background-color: #000000;
   color: #ffffff;
   border: none;
-  border-radius: 10px;
-  font-family: 'Inter';
+  border-radius: 2px;
+  font-family: Inter, Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -21,8 +21,8 @@
 @media screen and (max-width: 602px) {
   .form__save {
     width: 238px;
-    height: 46px;
-    margin: 18px auto 25px;
+    min-height: 46px;
+    margin: 23px auto 25px;
     font-size: 14px;
     line-height: 17px;
   }

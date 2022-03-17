@@ -1,18 +1,11 @@
 .element__item {
   margin: 0;
-  margin: 25px 21px 31px 21px;
+  margin: 20px 20px 25px 21px;
   display: flex;
   justify-content: space-between;
-  font-family: 'Inter';
+  font-family: Inter, Georgia, sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
-}
-
-.element__text {
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }

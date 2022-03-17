@@ -1,24 +1,27 @@
-.form__close {
+.popup__close {
   width: 32px;
   height: 32px;
   margin-left: 8px;
+  margin-bottom: 380px;
   padding: 0;
-  align-self: flex-start;
+  align-self: center;
+  background-image: url('../../../images/popup-close-icon.svg');
   background-color: #000000;
+  background-repeat: no-repeat;
+  background-position: center;
   border: none;
 }
 
-.form__close:hover {
+.popup__close:hover {
   cursor: pointer;
   opacity: 0.6;
 }
 
 @media screen and (max-width: 602px) {
-  .form__close {
+  .popup__close {
     width: 20px;
     height: 20px;
     margin-bottom: 16px;
     align-self: flex-end;
-    margin-right: calc(50vw - 141px);
   }
 }

@@ -1,11 +1,16 @@
 .profile__info-button {
-  display: inline;
-  margin-left: 18px;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  align-self: center;
+  margin: auto;
   width: 24px;
   height: 24px;
+  transition: 0.3s;
+  background-image: url('../../../images/info-button.svg');
   background-color: #000000;
+  background-repeat: no-repeat;
+  background-position: center;
   border: 1px solid #FFFFFF;
-  padding: 0;
 }
 
 .profile__info-button:hover {
@@ -15,7 +20,7 @@
 
 @media screen and (max-width: 602px) {
   .profile__info-button {
-    margin-left: 10px;
+    margin-left: 18px;
     width: 16px;
     height: 16px;
   }

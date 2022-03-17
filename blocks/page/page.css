@@ -1,12 +1,5 @@
 .page {
+  margin: 0;
+  background-color: #000000;
   color: #ffffff;
-  min-width: 282px;
-  max-width: 880px;
-  margin: 0 auto;
-}
-
-@media screen and (max-width: 918px) {
-  .page {
-    margin: auto 19px;
-  }
 }

@@ -1,7 +1,11 @@
 .profile__name {
-  display: inline;
+  grid-column: 1/2;
+  grid-row: 1/2;
   margin: 0;
-  font-family: 'Inter';
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Inter, Georgia, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
@@ -10,10 +14,7 @@
 
 @media screen and (max-width: 602px) {
   .profile__name {
-    margin:0 18px 0 45px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
+    justify-self: end;
     font-size: 27px;
     line-height: 33px;
     text-align: center;
