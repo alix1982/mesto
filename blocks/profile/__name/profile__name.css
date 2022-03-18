@@ -12,9 +12,8 @@
   line-height: 48px;
 }
 
-@media screen and (max-width: 602px) {
+@media screen and (max-width: 700px) {
   .profile__name {
-    justify-self: end;
     font-size: 27px;
     line-height: 33px;
     text-align: center;

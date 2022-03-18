@@ -2,19 +2,11 @@
   min-width: 282px;
   max-width: 880px;
   margin: 0 auto 60px;
-  font-family: Inter, Georgia, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  color: #545454;
 }
 
 @media screen and (max-width: 602px) {
   .footer {
     margin-bottom: 36px;
-    font-size: 14px;
-    line-height: 17px;
   }
 }
 

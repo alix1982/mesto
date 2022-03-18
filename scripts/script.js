@@ -8,22 +8,24 @@ let name = document.querySelector('.profile__name');
 let work = document.querySelector('.profile__work');
 let buttonProfile = document.querySelector('.profile__info-button');
 
-function formSubmitHandler (evt) {
-  evt.preventDefault();
-  name.textContent=input[0].value
-  work.textContent=input[1].value
-  popupWin.classList.remove('popup_opened')
-}
-
-function formOpen () {
-  input[0].value=(name.textContent);
-  input[1].value=(work.textContent);
-  popupWin.classList.add('popup_opened');
-}
-
 function closePopup () {
   popupWin.classList.remove('popup_opened');
 }
+
+function formSubmitHandler (evt) {
+  evt.preventDefault();
+  name.textContent = input[0].value;
+  work.textContent = input[1].value;
+  closePopup();
+}
+
+function formOpen () {
+  input[0].value = (name.textContent);
+  input[1].value = (work.textContent);
+  popupWin.classList.add('popup_opened');
+}
+
+
 
 popup.addEventListener('click', formOpen);
 close.addEventListener('click', closePopup);

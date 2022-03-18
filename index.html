@@ -29,7 +29,7 @@
       </section>
       
       <section aria-label="галерея">
-        <ul class="element ul-none">
+        <ul class="element">
           <li class="element__list">
             <img src="images/karachaevsk.png" class="element__img" alt="фото">
             <div class="element__item">
@@ -84,19 +84,19 @@
     </main>
     
     <footer class="footer">
-      <p>&copy; 2022 Mesto Russia</p>
+      <h2 class="footer__heading">&copy; 2022 Mesto Russia</h2>
     </footer>
   </div>
   
   <section class="popup">
     <div class="popup__cell">
-      <button class="popup__close">
+      <button class="popup__close" type="button">
       </button>
-      <form class="form" name="форма">
+      <form class="form" name="form">
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <input class="form__text" type="text" name="имя" placeholder="Жак-Ив Кусто">
-        <input class="form__text" type="text" name="деятельность" placeholder="Иссдедователь океана">
-        <button class="form__save">
+        <input class="form__text" type="text" name="name" placeholder="Жак-Ив Кусто">
+        <input class="form__text" type="text" name="work" placeholder="Иссдедователь океана">
+        <button class="form__save" type="submit">
             Сохранить
         </button>
       </form>

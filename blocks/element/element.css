@@ -3,6 +3,8 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
 }
 
 @media screen and (max-width: 602px) {
