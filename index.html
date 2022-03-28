@@ -30,55 +30,18 @@
       
       <section class="elemets" aria-label="галерея">
         <ul class="element">
-          <li class="element__list">
-            <img src="images/karachaevsk.png" class="element__img" alt="фото">
-            <div class="element__item">
-              <p class="element__text">Карачаевск</p>
-              <button class="element__like" type="button">
-              </button>
-            </div>
-          </li>
-          <li class="element__list">
-            <img src="images/elbrus.png" class="element__img" alt="фото">
-            <div class="element__item">
-              <p class="element__text">Гора Эльбрус</p>
-              <button class="element__like" type="button">
-              </button>
-            </div>
-          </li>
-          <li class="element__list">
-            <img src="images/dombay.png" class="element__img" alt="фото">
-            <div class="element__item">
-              <p class="element__text">Домбай</p>
-              <button class="element__like" type="button">
-              </button>
-            </div>
-          </li>
-          <li class="element__list">
-            <img src="images/elbrus.png" class="element__img" alt="фото">
-            <div class="element__item">
-              <p class="element__text">Гора Эльбрус</p>
-              <button class="element__like" type="button">
-              </button>
-            </div>
-          </li>
-          <li class="element__list">
-            <img src="images/dombay.png" class="element__img" alt="фото">
-            <div class="element__item">
-              <p class="element__text">Домбай</p>
-              <button class="element__like" type="button">
-              </button>
-            </div>
-          </li>
-          <li class="element__list">
-            <img src="images/karachaevsk.png" class="element__img" alt="фото">
-            <div class="element__item">
-              <p class="element__text">Карачаево-Черкесия</p>
-              <button class="element__like" type="button">
-              </button>
-            </div>
-          </li>
+          
         </ul>
+        <template id="foto">
+            <li class="element__list">
+              <img class="element__img" alt="фото">
+              <button class="element__del" type="button"></button>
+              <div class="element__item">
+                <p class="element__text"></p>
+                <button class="element__like" type="button"></button>
+              </div>
+            </li>
+          </template>
       </section>
 
     </main>
@@ -100,6 +63,14 @@
             Сохранить
         </button>
       </form>
+    </div>
+  </section>
+  <section class="popupImg">
+    <div class="popupImg__cell">
+      <button class="popupImg__close" type="button">
+      </button>
+      <img class="popupImg__img" src="images/dombay.png" alt="фото">
+      <p class="popupImg__text">Нечто</p>
     </div>
   </section>
   <script src="scripts/script.js"></script>

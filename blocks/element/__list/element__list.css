@@ -1,4 +1,5 @@
 .element__list {
+  position: relative;
   width: 282px;
   margin-top: 20px;
   background-color: #ffffff;
