@@ -1,4 +1,4 @@
-.popup__heading {
+.popupInfo__heading {
   margin: 34px 64px 41px 36px;
   font-family: Inter, Georgia, sans-serif;
   font-style: normal;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 602px) {
-  .popup__heading {
+  .popupInfo__heading {
     margin: 25px auto 70px;
     font-size: 18px;
     line-height: 22px;

@@ -1,4 +1,4 @@
-.popup__cell {
+.popupInfo__cell {
   position: absolute;
   top: calc(41.7vh - 165px);
   left: calc(50vw - 215px);
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 602px) {
-  .popup__cell {
+  .popupInfo__cell {
     width: 282px;
     min-height: 322px;
     top: calc(40.5vh - 161px);
@@ -16,7 +16,7 @@
 }
 
 @media screen and (min-width: 1500px) {
-  .popup__cell {
+  .popupInfo__cell {
     top: 250px;
   }
 }

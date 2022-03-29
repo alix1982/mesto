@@ -1,4 +1,4 @@
-.form__text {
+.formInfo__text {
   margin: 0 auto;
   margin-bottom: 25px;
   padding-bottom: 4px;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 602px) {
-  .form__text {
+  .formInfo__text {
     width: 238px;
     margin-bottom: 22px;
   }

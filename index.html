@@ -51,20 +51,36 @@
     </footer>
   </div>
   
-  <section class="popup">
-    <div class="popup__cell">
-      <button class="popup__close" type="button">
+  <section class="popupInfo">
+    <div class="popupInfo__cell">
+      <button class="popupInfo__close" type="button">
       </button>
-      <form class="form" name="form">
-        <h2 class="popup__heading">Редактировать профиль</h2>
-        <input class="form__text" type="text" name="name" placeholder="Жак-Ив Кусто">
-        <input class="form__text" type="text" name="work" placeholder="Иссдедователь океана">
-        <button class="form__save" type="submit">
+      <form class="formInfo" name="form">
+        <h2 class="popupInfo__heading">Редактировать профиль</h2>
+        <input class="formInfo__text" type="text" name="name" placeholder="Жак-Ив Кусто">
+        <input class="formInfo__text" type="text" name="work" placeholder="Иссдедователь океана">
+        <button class="formInfo__save" type="submit">
             Сохранить
         </button>
       </form>
     </div>
   </section>
+  
+  <section class="popupAdd">
+    <div class="popupAdd__cell">
+      <button class="popupAdd__close" type="button">
+      </button>
+      <form class="formAdd" name="form">
+        <h2 class="popupAdd__heading">Новое место</h2>
+        <input class="formAdd__text" type="text" name="title" placeholder="Название">
+        <input class="formAdd__text" type="text" name="link" placeholder="Ссылка на картинку">
+        <button class="formAdd__save" type="submit">
+            Создать
+        </button>
+      </form>
+    </div>
+  </section>
+  
   <section class="popupImg" aria-label="попап картинок">
     <div class="popupImg__cell">
       <button class="popupImg__close" type="button">
