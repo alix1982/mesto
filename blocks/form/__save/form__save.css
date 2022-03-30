@@ -1,4 +1,4 @@
-.formInfo__save {
+.form__save {
   margin: 23px auto 37px;
   width: 358px;
   min-height: 50px;
@@ -13,13 +13,13 @@
   line-height: 22px;
 }
 
-.formInfo__save:hover {
+.form__save:hover {
   cursor: pointer;
   opacity: 0.8;
 }
 
 @media screen and (max-width: 602px) {
-  .formInfo__save {
+  .form__save {
     width: 238px;
     min-height: 46px;
     margin: 23px auto 25px;

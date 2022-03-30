@@ -22,27 +22,21 @@
 @import url(../blocks/element/__like/_active/element__like_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__heading/footer__heading.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popupInfo/popupInfo.css);
-@import url(../blocks/popupInfo/_opened/popupInfo_opened.css);
 @import url(../blocks/popupInfo/__cell/popupInfo__cell.css);
-@import url(../blocks/popupInfo/__close/popupInfo__close.css);
 @import url(../blocks/popupInfo/__heading/popupInfo__heading.css);
-@import url(../blocks/formInfo/formInfo.css);
-@import url(../blocks/formInfo/__text/formInfo__text.css);
-@import url(../blocks/formInfo/__save/formInfo__save.css);
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__text/form__text.css);
+@import url(../blocks/form/__save/form__save.css);
 @import url(../blocks/popupAdd/popupAdd.css);
-@import url(../blocks/popupAdd/_opened/popupAdd_opened.css);
 @import url(../blocks/popupAdd/__cell/popupAdd__cell.css);
-@import url(../blocks/popupAdd/__close/popupAdd__close.css);
 @import url(../blocks/popupAdd/__heading/popupAdd__heading.css);
-@import url(../blocks/formAdd/formAdd.css);
-@import url(../blocks/formAdd/__text/formAdd__text.css);
-@import url(../blocks/formAdd/__save/formAdd__save.css);
 @import url(../blocks/popupImg/popupImg.css);
-@import url(../blocks/popupImg/_opened/popupImg_opened.css);
 @import url(../blocks/popupImg/__cell/popupImg__cell.css);
-@import url(../blocks/popupImg/__close/popupImg__close.css);
 @import url(../blocks/popupImg/__img/popupImg__img.css);
 @import url(../blocks/popupImg/__text/popupImg__text.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 
 /* outline: red solid 1px; */
