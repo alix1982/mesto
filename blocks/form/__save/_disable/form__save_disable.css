@@ -1,0 +1,8 @@
+.form__save_disable {
+    opacity: 0.2;
+  }
+  
+.form__save_disable:hover {
+  cursor: none;
+  opacity: 0.2;
+}

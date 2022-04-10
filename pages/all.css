@@ -537,3 +537,30 @@
 .popupImg_opened {
   display: flex;
 }
+.form__text_error {
+  border-bottom-color: red
+}
+
+.form__message-error {
+  /* position: absolute;
+  top: 140px;
+  left: 35px; */
+  width: 358px;
+  min-height: 12px;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+}
+.form__save_disable {
+  opacity: 0.2;
+}
+
+.form__save_disable:hover {
+  cursor: none;
+  opacity: 0.2;
+}

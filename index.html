@@ -55,10 +55,12 @@
     <div class="popupInfo__cell">
       <button class="popup__close" type="button">
       </button>
-      <form class="form formInfo" name="form">
+      <form class="form formInfo" name="form" novalidate>
         <h2 class="popupInfo__heading">Редактировать профиль</h2>
-        <input class="form__text formInfo__text" type="text" name="name" placeholder="Жак-Ив Кусто">
-        <input class="form__text formInfo__text" type="text" name="work" placeholder="Иссдедователь океана">
+        <input class="form__text formInfo__text" type="text" name="name" placeholder="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+        <span class="form__message-error"> </span>
+        <input class="form__text formInfo__text" type="text" name="work" placeholder="Иссдедователь океана"minlength="2" maxlength="200" required>
+        <span class="form__message-error"> </span>
         <button class="form__save formInfo__save" type="submit">
             Сохранить
         </button>
@@ -70,10 +72,12 @@
     <div class="popupAdd__cell">
       <button class="popup__close" type="button">
       </button>
-      <form class="form formAdd" name="form">
+      <form class="form formAdd" name="form" novalidate>
         <h2 class="popupAdd__heading">Новое место</h2>
-        <input class="form__text formAdd__text" type="text" name="title" placeholder="Название">
-        <input class="form__text formAdd__text" type="text" name="link" placeholder="Ссылка на картинку">
+        <input class="form__text formAdd__text" type="text" name="title" placeholder="Название" minlength="2" maxlength="30" required>
+        <span class="form__message-error"> </span>
+        <input class="form__text formAdd__text" type="url" name="link" placeholder="Ссылка на картинку" required>
+        <span class="form__message-error"> </span>
         <button class="form__save formAdd__save" type="submit">
             Создать
         </button>
@@ -89,6 +93,7 @@
       <p class="popupImg__text">Нечто</p>
     </div>
   </section>
-  <script src="scripts/script.js"></script>
+  <script src="scripts/forms.js"></script>
+  <script src="scripts/validate.js"></script>
 </body>
 </html>
