@@ -538,7 +538,7 @@
   display: flex;
 }
 .form__text_error {
-  border-bottom-color: red
+  border-bottom-color: red;
 }
 
 .form__message-error {
