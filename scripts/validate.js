@@ -1,5 +1,11 @@
-const forms = Array.from(document.querySelectorAll('.form'));
-const obj = {};
+const obj = {
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  buttonSelector: '.form__save',
+  inactiveButtonClass: 'form__save_disable',
+  inputErrorClass: 'form__text_error',
+  errorClass: 'form__message-error'
+};
 
 function activeButton (inputList) {
   return inputList.some(function(inputElement) {
@@ -8,51 +14,46 @@ function activeButton (inputList) {
 };
 function toggleButton (key, inputList) {
   if (activeButton(inputList)) {
-    key.classList.add('form__save_disable');
+    key.classList.add(obj.inactiveButtonClass);
     key.setAttribute('disabled', true)
   } 
   else {
-    key.classList.remove('form__save_disable');
+    key.classList.remove(obj.inactiveButtonClass);
     key.removeAttribute('disabled', true);
   }
 }
 function addTextError (inputElement, spanElement){
-  inputElement.classList.add('form__text_error');
+  inputElement.classList.add(obj.inputErrorClass);
   spanElement.textContent = inputElement.validationMessage;
 }
 function removeTextError (inputElement, spanElement) {
-  inputElement.classList.remove('form__text_error');
+  inputElement.classList.remove(obj.inputErrorClass);
   spanElement.textContent = ' ';
 }
 
-function enableValidation(
-  obj = {form: formElement, 
-         inputs: inputList,
-         spans: '.form__message-error',
-         button: '.form__save'
-         }
-  ) 
-  {const spans = Array.from(obj.form.querySelectorAll(obj.spans));
-  const button = obj.form.querySelector(obj.button);
-  obj.inputs.forEach(function (input, index) {
+function enableValidation (obj) 
+  {const forms = Array.from(document.querySelectorAll(obj.formSelector));
+  forms.forEach(function (form) {
+    const inputs = Array.from(form.querySelectorAll(obj.inputSelector));
+    const button = form.querySelector(obj.buttonSelector);
+    form.addEventListener('submit', function(evt) {
+      evt.preventDefault();
+    });
+    inputs.forEach(function (input) {
       input.addEventListener('input', function(evt) {
-      if (!evt.target.validity.valid) {addTextError(input, spans[index])} 
-      else {removeTextError(input, spans[index])};
-      toggleButton(button, obj.inputs);
+        const span = form.querySelector(`.${input.id}-error`);
+        if (!evt.target.validity.valid) {addTextError(input, span)}
+        else {removeTextError(input, span)};
+        toggleButton(button, inputs);
+      });
     });
   });
 };
-
-forms.forEach(function (form) {
-  let inputs = Array.from(form.querySelectorAll('.form__text'));
-  form.addEventListener('submit', function(evt) {
-    evt.preventDefault();
+enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__text',
+    buttonSelector: '.form__save',
+    inactiveButtonClass: 'form__save_disable',
+    inputErrorClass: 'form__text_error',
+    errorClass: 'form__message-error'
   });
-  enableValidation({
-    form: form, 
-    inputs: inputs,
-    spans: '.form__message-error',
-    button: '.form__save'
-  });
-});
-

@@ -57,10 +57,10 @@
       </button>
       <form class="form formInfo" name="form" novalidate>
         <h2 class="popupInfo__heading">Редактировать профиль</h2>
-        <input class="form__text formInfo__text" type="text" name="name" placeholder="Жак-Ив Кусто" minlength="2" maxlength="40" required>
-        <span class="form__message-error"> </span>
-        <input class="form__text formInfo__text" type="text" name="work" placeholder="Иссдедователь океана"minlength="2" maxlength="200" required>
-        <span class="form__message-error"> </span>
+        <input id="name-input" class="form__text formInfo__text formInfo__text_name" type="text" name="name" placeholder="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+        <span class="name-input-error form__message-error"> </span>
+        <input id="work-input" class="form__text formInfo__text_work" type="text" name="work" placeholder="Иссдедователь океана"minlength="2" maxlength="200" required>
+        <span class="work-input-error form__message-error"> </span>
         <button class="form__save formInfo__save" type="submit">
             Сохранить
         </button>
@@ -74,10 +74,10 @@
       </button>
       <form class="form formAdd" name="form" novalidate>
         <h2 class="popupAdd__heading">Новое место</h2>
-        <input class="form__text formAdd__text" type="text" name="title" placeholder="Название" minlength="2" maxlength="30" required>
-        <span class="form__message-error"> </span>
-        <input class="form__text formAdd__text" type="url" name="link" placeholder="Ссылка на картинку" required>
-        <span class="form__message-error"> </span>
+        <input id="title-input" class="form__text formAdd__text formAdd__text_title" type="text" name="title" placeholder="Название" minlength="2" maxlength="30" required>
+        <span class="title-input-error form__message-error"> </span>
+        <input id="link-input" class="form__text formAdd__text_link" type="url" name="link" placeholder="Ссылка на картинку" required>
+        <span class="link-input-error form__message-error"> </span>
         <button class="form__save formAdd__save" type="submit">
             Создать
         </button>

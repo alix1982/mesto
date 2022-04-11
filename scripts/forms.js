@@ -29,103 +29,82 @@ const card = document.querySelector('#foto').content;
 const popups = document.querySelectorAll('.popup');
 const popupWinInfo = document.querySelector('.popupInfo');
 const inputsInfo = Array.from(document.querySelectorAll('.formInfo__text'));
+const inputInfoName = document.querySelector('.formInfo__text_name');
+const inputInfoWork = document.querySelector('.formInfo__text_work');
 const name = document.querySelector('.profile__name');
 const work = document.querySelector('.profile__work');
 const formInfo = document.querySelector('.formInfo');
 const buttonProfileInfo = document.querySelector('.profile__info-button');
 const popupWinAdd = document.querySelector('.popupAdd');
 const inputsAdd = Array.from(document.querySelectorAll('.formAdd__text'));
+const inputAddTitle = document.querySelector('.formAdd__text_title');
+const inputAddLink = document.querySelector('.formAdd__text_link');
 const buttonProfileAdd = document.querySelector('.profile__add-button');
 const formAdd = document.querySelector('.formAdd');
 const popupWinImg = document.querySelector('.popupImg');
 const popupImg = document.querySelector('.popupImg__img');
-const popupText= document.querySelector('.popupImg__text')
-const buttons =document.querySelectorAll('.form__save')
+const popupText = document.querySelector('.popupImg__text');
+const buttonInfo = document.querySelector('.formInfo__save');
+const buttonAdd = document.querySelector('.formAdd__save');
 
 function createCard (itemSrc, itemText) {
   const cardOnline = card.querySelector('.element__list').cloneNode(true);
   cardOnline.querySelector('.element__img').src = itemSrc;
   cardOnline.querySelector('.element__img').alt = itemText;
   cardOnline.querySelector('.element__text').textContent = itemText;
-  like (cardOnline);
-  del (cardOnline);
-  openImg (cardOnline);
+  cardOnline.querySelector('.element__like').addEventListener('click', function() {like(cardOnline)});
+  cardOnline.querySelector('.element__del').addEventListener('click', function() {del(cardOnline)});
+  cardOnline.querySelector('.element__img').addEventListener('click', function() {openImg (cardOnline)});
   return cardOnline;
 };
-function escEventListener (evt){
-  popups.forEach(function (item) {
-    if (evt.key === 'Escape') {
-      closePopup(item);
-      //console.log(evt.key);
-    };
-  });
-}
+function escEventListener (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  };
+};
 function openPopup (popup) {
   popup.classList.add('popup_opened');
-  popup.style = 'transition: visibility 0s, opacity 1s linear;';
   document.addEventListener('keydown', escEventListener);
 };
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
-  popup.style = 'transition: visibility 1s, opacity 1s linear;';
   document.removeEventListener('keydown', escEventListener);
 };
 function openFormInfo () {
-  inputsInfo[0].value = (name.textContent);
-  inputsInfo[1].value = (work.textContent);
-  toggleButton(buttons[0], inputsInfo);
+  inputInfoName.value = name.textContent;
+  inputInfoWork.value = work.textContent;
+  toggleButton(buttonInfo, inputsInfo);
   openPopup(popupWinInfo);
 };
 function submitFormInfo (evt) {
   evt.preventDefault();
-  name.textContent = inputsInfo[0].value;
-  work.textContent = inputsInfo[1].value;
+  name.textContent = inputInfoName.value;
+  work.textContent = inputInfoWork.value;
   closePopup(popupWinInfo);
 };
 function openFormAdd () {
-  inputsAdd[0].value = '';
-  inputsAdd[1].value = '';
-  toggleButton(buttons[1], inputsAdd);
+  inputAddTitle.value = '';
+  inputAddLink.value = '';
+  toggleButton(buttonAdd, inputsAdd);
   openPopup(popupWinAdd);
 };
 function submitFormAdd (evt) {
   evt.preventDefault();
-  element.prepend(createCard(inputsAdd[1].value, inputsAdd[0].value));
+  element.prepend(createCard(inputAddLink.value, inputAddTitle.value));
   closePopup(popupWinAdd);
 }
-function like (evt) {
-  evt.querySelector('.element__like').addEventListener('click', function() {
-    evt.querySelector('.element__like').classList.toggle('element__like_active');
-  });
+function like (cardElement) {
+  cardElement.querySelector('.element__like').classList.toggle('element__like_active');
 };
-function del (evt) {
-  evt.querySelector('.element__del').addEventListener('click', function() {
-    evt.remove()
-  });
+function del (cardElement) {
+  cardElement.remove()
 };
-function openImg (evt) {
-  evt.querySelector('.element__img').addEventListener('click', function() {
-    popupImg.src = evt.querySelector('.element__img').src;
-    popupImg.alt = evt.querySelector('.element__text').textContent;
-    popupText.textContent = evt.querySelector('.element__text').textContent;
-    openPopup(popupWinImg);
-  });
-}
-function activeButton (inputList) {
-  return inputList.some(function(inputElement) {
-    return (!inputElement.validity.valid);
-  });
+function openImg (cardElement) {
+  popupImg.src = cardElement.querySelector('.element__img').src;
+  popupImg.alt = cardElement.querySelector('.element__text').textContent;
+  popupText.textContent = cardElement.querySelector('.element__text').textContent;
+  openPopup(popupWinImg);
 };
-function toggleButton (key, inputList) {
-  if (activeButton(inputList)) {
-    key.classList.add('form__save_disable');
-    key.setAttribute('disabled', true)
-  } 
-  else {
-    key.classList.remove('form__save_disable');
-    key.removeAttribute('disabled', true);
-  }
-}
 
 //отрисовка галереи
 for (let i = 0; i<initialCards.length; i++) {
@@ -134,18 +113,17 @@ for (let i = 0; i<initialCards.length; i++) {
 
 // обработчик закрытия попапов
 popups.forEach(function (item) {
-  item.querySelector('.popup__close').addEventListener('click', function () {
-    closePopup(item);
-  });
   item.addEventListener('click', function (evt) {
-    if (evt.target === evt.currentTarget){
+    if ((evt.target === evt.currentTarget) || (evt.target.classList.contains('popup__close'))){
       closePopup(item);
-    }
+    };
   });
 });
+
 //обработчик открытия и отправки формы Info
 buttonProfileInfo.addEventListener('click', openFormInfo);
 formInfo.addEventListener('submit', submitFormInfo);
+
 //обработчик открытия и отправки формы Add
 buttonProfileAdd.addEventListener('click', openFormAdd);
 formAdd.addEventListener('submit', submitFormAdd);
