@@ -70,10 +70,10 @@ function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', escEventListener);
 };
-function openFormInfo () {
+function openFormInfo (inactiveButtonClass) {
   inputInfoName.value = name.textContent;
   inputInfoWork.value = work.textContent;
-  toggleButton(buttonInfo, inputsInfo);
+  toggleButton(buttonInfo, inputsInfo, inactiveButtonClass);
   openPopup(popupWinInfo);
 };
 function submitFormInfo (evt) {
@@ -82,10 +82,10 @@ function submitFormInfo (evt) {
   work.textContent = inputInfoWork.value;
   closePopup(popupWinInfo);
 };
-function openFormAdd () {
+function openFormAdd (inactiveButtonClass) {
   inputAddTitle.value = '';
   inputAddLink.value = '';
-  toggleButton(buttonAdd, inputsAdd);
+  toggleButton(buttonAdd, inputsAdd, inactiveButtonClass);
   openPopup(popupWinAdd);
 };
 function submitFormAdd (evt) {
@@ -121,9 +121,9 @@ popups.forEach(function (item) {
 });
 
 //обработчик открытия и отправки формы Info
-buttonProfileInfo.addEventListener('click', openFormInfo);
+//buttonProfileInfo.addEventListener('click', openFormInfo(inactiveButtonClass));
 formInfo.addEventListener('submit', submitFormInfo);
 
 //обработчик открытия и отправки формы Add
-buttonProfileAdd.addEventListener('click', openFormAdd);
+//buttonProfileAdd.addEventListener('click', openFormAdd(inactiveButtonClass));
 formAdd.addEventListener('submit', submitFormAdd);
