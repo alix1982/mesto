@@ -1,12 +1,3 @@
-/* let obj = {
-  formSelector: '.form',
-  inputSelector: '.form__text',
-  buttonSelector: '.form__save',
-  inactiveButtonClass: 'form__save_disable',
-  inputErrorClass: 'form__text_error',
-  errorClass: 'form__message-error'
-}; */
-
 function activeButton (inputList) {
   return inputList.some(function(inputElement) {
     return (!inputElement.validity.valid);
@@ -42,7 +33,6 @@ function enableValidation (obj) {
     });
     inputs.forEach(function (input) {
       input.addEventListener('input', function(evt) {
-        //const span = form.querySelector(`.${inputElement.id}-error`);
         if (!evt.target.validity.valid) {addTextError(input, obj.inputErrorClass)}
         else {removeTextError(input, obj.inputErrorClass)};
         toggleButton(button, inputs, obj.inactiveButtonClass);
