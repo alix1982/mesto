@@ -1,10 +1,16 @@
 .element {
   margin: 30px auto 65px auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
+}
+
+@media screen and (max-width: 917px) {
+  .element {
+    justify-content: space-between;
+  }
 }
 
 @media screen and (max-width: 602px) {

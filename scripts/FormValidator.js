@@ -1,6 +1,9 @@
-import {buttonProfileInfo, buttonProfileAdd, openFormInfo, openFormAdd} from './index.js';
+//import {buttonProfileInfo, buttonProfileAdd, openFormInfo, openFormAdd} from './index.js';
+
 export class FormValidator {
   constructor (obj, form) {
+    this.obj = obj;
+    this.form = form;
   }
  
   _addTextError (inputElement, inputErrorClass) {
@@ -21,7 +24,7 @@ export class FormValidator {
     });
   };
   
-  _toggleButton (key, inputList, inactiveButtonClass) {
+  toggleButtonState (key, inputList, inactiveButtonClass) {
     if (this._activeButton(inputList)) {
       key.classList.add(inactiveButtonClass);
       key.setAttribute('disabled', true)
@@ -32,20 +35,15 @@ export class FormValidator {
     };
   };
 
-  enableValidation (obj, form) {
-    const inputs = Array.from(form.querySelectorAll(obj.inputSelector));
-    const button = form.querySelector(obj.buttonSelector);
-    form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
+  enableValidation () {
+    const inputs = Array.from(this.form.querySelectorAll(this.obj.inputSelector));
+    const button = this.form.querySelector(this.obj.buttonSelector);
     inputs.forEach((input) => {
       input.addEventListener('input', (evt) => {
-        if (!evt.target.validity.valid) {this._addTextError (input, obj.inputErrorClass)}
-        else {this._removeTextError(input, obj.inputErrorClass)};
-        this._toggleButton(button, inputs, obj.inactiveButtonClass);
+        if (!evt.target.validity.valid) {this._addTextError (input, this.obj.inputErrorClass)}
+        else {this._removeTextError(input, this.obj.inputErrorClass)};
+        this.toggleButtonState(button, inputs, this.obj.inactiveButtonClass);
       });
     });
-    buttonProfileInfo.addEventListener('click',  () => {openFormInfo(obj.inactiveButtonClass)});
-    buttonProfileAdd.addEventListener('click', () => {openFormAdd(obj.inactiveButtonClass)});
   };
 }

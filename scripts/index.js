@@ -72,7 +72,6 @@ function closePopup (popup) {
 function openFormInfo (inactiveButtonClass) {
   inputInfoName.value = name.textContent;
   inputInfoWork.value = work.textContent;
-  new FormValidator (obj, form)._toggleButton(buttonInfo, inputsInfo, inactiveButtonClass);
   openPopup(popupWinInfo);
 };
 function submitFormInfo (evt) {
@@ -82,15 +81,16 @@ function submitFormInfo (evt) {
   closePopup(popupWinInfo);
 };
 function openFormAdd (inactiveButtonClass) {
-  inputAddTitle.value = '';
-  inputAddLink.value = '';
-  new FormValidator (obj, form)._toggleButton(buttonAdd, inputsAdd, inactiveButtonClass);
+  formAdd.reset();
   openPopup(popupWinAdd);
 };
 function submitFormAdd (evt) {
   evt.preventDefault();
-  element.prepend(new Card ().createCard(inputAddLink.value, inputAddTitle.value));
+  element.prepend(getCard(inputAddLink.value, inputAddTitle.value));
   closePopup(popupWinAdd);
+};
+function getCard (link, title) {
+  return new Card (link, title).createCard();
 };
 
 // обработчик закрытия попапов
@@ -102,17 +102,27 @@ popups.forEach(function (item) {
   });
 });
 
-//обработчик отправки формы Info и Add
+//обработчик открытия и отправки формы Info и Add
+buttonProfileInfo.addEventListener('click',  () => {
+  openFormInfo(obj.inactiveButtonClass);
+  new FormValidator (obj, form).toggleButtonState(buttonInfo, inputsInfo, obj.inactiveButtonClass);
+});
+buttonProfileAdd.addEventListener('click', () => {
+  openFormAdd(obj.inactiveButtonClass);
+  new FormValidator (obj, form).toggleButtonState(buttonAdd, inputsAdd, obj.inactiveButtonClass);
+});
 formInfo.addEventListener('submit', submitFormInfo);
 formAdd.addEventListener('submit', submitFormAdd);
 
 //отрисовка галереи
 for (let i = 0; i<initialCards.length; i++) {
-  element.append(new Card ().createCard(initialCards[i].link, initialCards[i].name));
+  element.append(getCard(initialCards[i].link, initialCards[i].name));
 };
 
 //валидация форм
-new FormValidator (obj, formInfo).enableValidation (obj, formInfo);
-new FormValidator (obj, formAdd).enableValidation (obj, formAdd);
-
-export {buttonProfileInfo, buttonProfileAdd, openFormInfo, openFormAdd,openPopup};
+const formValidatorInfo = new FormValidator (obj, formInfo);
+const formValidatorAdd = new FormValidator (obj, formAdd);
+formValidatorInfo.enableValidation ();
+formValidatorAdd.enableValidation ();
+  
+export {openPopup};
