@@ -2,16 +2,16 @@ import {openPopup} from './index.js';
 
 export class Card {
   constructor (itemSrc, itemText) {
-    this.itemSrc = itemSrc;
-    this.itemText = itemText;
+    this._itemSrc = itemSrc;
+    this._itemText = itemText;
     this.cardTemplate = document.querySelector('#foto').content;
     this.cardOnline = this.cardTemplate.querySelector('.element__list').cloneNode(true);
   }
   
   _getCard () {
-    this.cardOnline.querySelector('.element__img').src = this.itemSrc;
-    this.cardOnline.querySelector('.element__img').alt = this.itemText;
-    this.cardOnline.querySelector('.element__text').textContent = this.itemText;
+    this.cardOnline.querySelector('.element__img').src = this._itemSrc;
+    this.cardOnline.querySelector('.element__img').alt = this._itemText;
+    this.cardOnline.querySelector('.element__text').textContent = this._itemText;
   };
   _likeCard () {
     this.cardOnline.querySelector('.element__like').addEventListener('click', () => {
@@ -29,9 +29,9 @@ export class Card {
       const popupWinImg = document.querySelector('.popupImg');
       const popupImg = document.querySelector('.popupImg__img');
       const popupText = document.querySelector('.popupImg__text');
-      popupImg.src = this.itemSrc;
-      popupImg.alt = this.itemText;
-      popupText.textContent = this.itemText;
+      popupImg.src = this._itemSrc;
+      popupImg.alt = this._itemText;
+      popupText.textContent = this._itemText;
       openPopup(popupWinImg);
     });
   };
