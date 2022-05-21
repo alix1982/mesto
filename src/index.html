@@ -5,18 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
-  <link rel="stylesheet" href="pages/index.css">  
+  <!-- <link rel="stylesheet" href="pages/index.css">   -->
 </head>
 
 <body class="body">
   <div class="page">
     <header class="header">
-      <img src="images/logo-mesto.svg" class="header__logo" alt="Логотип">
+      <img src="<%=require('./images/logo-mesto.svg')%>" class="header__logo" alt="Логотип">
     </header>
     
     <main class="content">
       <section class="profile" aria-label="профиль">
-        <img src="images/avatar.png" class="profile__avatar" alt="аватар">
+        <img src="<%=require('./images/avatar.png')%>" class="profile__avatar" alt="аватар">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__info-button" type="button">
@@ -89,10 +89,10 @@
     <div class="popupImg__cell">
       <button class="popup__close" type="button">
       </button>
-      <img class="popupImg__img" src="images/dombay.png" alt="фото">
+      <img class="popupImg__img" src="<%=require('./images/dombay.png')%>" alt="фото">
       <p class="popupImg__text">Нечто</p>
     </div>
   </section>
-  <script src="scripts/index.js" type="module"></script>
+  <!-- <script src="scripts/index.js" type="module"></script> -->
 </body>
 </html>

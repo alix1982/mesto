@@ -1,4 +1,4 @@
-import {openPopup} from './index.js';
+import {PopupWithImage} from './PopupWithImage.js';
 
 export class Card {
   constructor (itemSrc, itemText) {
@@ -6,6 +6,7 @@ export class Card {
     this._itemText = itemText;
     this._cardTemplate = document.querySelector('#foto').content;
     this._cardOnline = this._cardTemplate.querySelector('.element__list').cloneNode(true);
+
   }
   
   _getCard () {
@@ -24,22 +25,13 @@ export class Card {
         this._cardOnline = null;
     });
   };
-  _openImg () {
-    this._cardOnline.querySelector('.element__img').addEventListener('click', () => {
-      const popupWinImg = document.querySelector('.popupImg');
-      const popupImg = document.querySelector('.popupImg__img');
-      const popupText = document.querySelector('.popupImg__text');
-      popupImg.src = this._itemSrc;
-      popupImg.alt = this._itemText;
-      popupText.textContent = this._itemText;
-      openPopup(popupWinImg);
-    });
-  };
+
   createCard () {
     this._getCard();
     this._likeCard ();
     this._deleteCard ();
-    this._openImg ();
+    const popupImg = new PopupWithImage ();
+    popupImg.openPopup(this._cardOnline, this._itemSrc, this._itemText);
     return this._cardOnline;
   };
 };
