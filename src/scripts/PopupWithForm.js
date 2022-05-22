@@ -1,35 +1,28 @@
 import {Popup} from './Popup.js';
-import {element, getCard, popupWinAdd, popupWinInfo, userInfo} from './index.js';
-
-const inputAddTitle = document.querySelector('.formAdd__text_title');
-const inputAddLink = document.querySelector('.formAdd__text_link');
 
 export class PopupWithForm extends Popup{
-  constructor (popupSelector)
-    {super (popupSelector)}
-    _getInputValues = (evt) => {
-      evt.preventDefault();
-      if (document.querySelector(`.${this.popupSelector}`) === popupWinInfo) {
-        userInfo.setUserInfo();
-      };
-      if (document.querySelector(`.${this.popupSelector}`) === popupWinAdd) {
-        element.prepend(getCard(inputAddLink.value, inputAddTitle.value));
-      }
+  constructor ({ popupSelector, handlerSubmit })
+    {
+      super (popupSelector),
+      this.handlerSubmit = handlerSubmit;
+      this._form = this.popupSelector.querySelector('.form')
+    }
+    _getInputValues = () => {
+      const inputs = Array.from(this.popupSelector.querySelectorAll('.form__text'))
+      return this.inputs = inputs;
     };
-    setEventListeners = (popupElement) => {
-      popupElement.addEventListener('click', (evt) => {
-        if ((evt.target === evt.currentTarget) || (evt.target.classList.contains('popup__close'))){
-          this.closePopup (popupElement);
-        };
-      });
-      popupElement.addEventListener('submit', (evt) => {
-        this._getInputValues (evt);
-        this.closePopup(popupElement);
+    
+    setEventListeners = () => {
+      super.setEventListeners();
+      this._form.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+        this._getInputValues ();
+        this.handlerSubmit();
+        this.close();
       });
     };
-    closePopup = (popupElement) => {
-      popupElement.classList.remove(this.popupSelector);
-      document.removeEventListener('keydown', this._handleEscClose);
-      popupElement.querySelector('.form').reset();
+    close () {
+      super.close();
+      this.popupSelector.querySelector('.form').reset();
     };
 }

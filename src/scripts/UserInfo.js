@@ -1,19 +1,20 @@
-import {popup} from './index.js';
-import {inputInfoName, inputInfoWork, popupWinInfo} from './index.js';
-
 export class UserInfo {
-  constructor (name, work)
+  constructor ({name, work})
     {
-      this.name = name;
-      this.work = work;
+      this.name = document.querySelector(name);
+      this.work = document.querySelector(work);
     }
     getUserInfo = () => {
-      inputInfoName.value = this.name.textContent;
-      inputInfoWork.value = this.work.textContent;
-      popup.openPopup(popupWinInfo);
+      const dataInfo = {name: this.name.textContent, work: this.work.textContent};
+      return this.dataInfo = dataInfo;
     };
-    setUserInfo = () => {
-      this.name.textContent = inputInfoName.value;
-      this.work.textContent = inputInfoWork.value;
+    
+    setUserInfo = (inputName, inputWork) => {
+      this.getUserInfo();
+      this.dataInfo.name = inputName.value;
+      this.dataInfo.work = inputWork.value;
+      this.name.textContent = this.dataInfo.name;
+      this.work.textContent = this.dataInfo.work;
     };
+
 }
