@@ -1,13 +1,12 @@
 import '../pages/index.css';
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
-import {initialCards} from './data.js';
-import {Section} from './Section.js';
-import {Popup} from './Popup.js';
-import {PopupWithForm} from './PopupWithForm.js';
-import {UserInfo} from './UserInfo.js';
-import {PopupWithImage} from './PopupWithImage.js';
-//import { data } from 'autoprefixer';
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {initialCards} from '../components/data.js';
+import {Section} from '../components/Section.js';
+import {PopupWithForm} from '../components/PopupWithForm.js';
+import {UserInfo} from '../components/UserInfo.js';
+import {PopupWithImage} from '../components/PopupWithImage.js';
+//  import { data } from 'autoprefixer';
 
 const obj = {
   formSelector: '.form',
@@ -21,16 +20,13 @@ const obj = {
 const element = document.querySelector('.element');
 
 //Info
-
-export const popupWinInfo = document.querySelector('.popupInfo');
-export const inputInfoName = document.querySelector('.formInfo__text_name');
-export const inputInfoWork = document.querySelector('.formInfo__text_work');
-export const userInfo = new UserInfo ({name:'.profile__name', work:'.profile__work'});
+const inputInfoName = document.querySelector('.formInfo__text_name');
+const inputInfoWork = document.querySelector('.formInfo__text_work');
+const userInfo = new UserInfo ({name:'.profile__name', work:'.profile__work'});
 const popupWithFormInfo = new PopupWithForm({
-  popupSelector: popupWinInfo,
-  handlerSubmit: () => {
-    userInfo.setUserInfo(inputInfoName, inputInfoWork);
-    
+  popupSelector: '.popupInfo',
+  handlerSubmit: (inputList) => {
+    userInfo.setUserInfo(inputList);
   }
 });
 const formInfo = document.querySelector('.formInfo');
@@ -38,43 +34,50 @@ const buttonProfileInfo = document.querySelector('.profile__info-button');
 const formValidatorInfo = new FormValidator (obj, formInfo);
 
 //Add
-export const popupWinAdd = document.querySelector('.popupAdd');
-const inputAddTitle = document.querySelector('.formAdd__text_title');
-const inputAddLink = document.querySelector('.formAdd__text_link');
 const popupWithFormAdd = new PopupWithForm({
-  popupSelector: popupWinAdd,
-  handlerSubmit: () => {element.prepend(getCard(inputAddLink.value, inputAddTitle.value))}
+  popupSelector: '.popupAdd',
+  handlerSubmit: (inputList) => {
+    const card = new Section ({
+      items: inputList,
+       renderer: () => {}
+    }, '.element');
+    card.addItem(getCard(inputList.link, inputList.title));
+  }
 });
 const formAdd = document.querySelector('.formAdd');
 const buttonProfileAdd = document.querySelector('.profile__add-button');
 const formValidatorAdd = new FormValidator (obj, formAdd);
 
-//Img
-const popupWinImg = document.querySelector('.popupImg');
-
+//
 buttonProfileInfo.addEventListener('click',  () => {
-  inputInfoName.value = userInfo.getUserInfo().name;
-  inputInfoWork.value = userInfo.getUserInfo().work;
+  const dataInfo = userInfo.getUserInfo();
+  // const inputList = dataInfo;
+  // console.log(inputListI);
+  // console.log(dataInfo);
+  inputInfoName.value = dataInfo.name;
+  inputInfoWork.value = dataInfo.work;
   formValidatorInfo.toggleButtonState();
-  popupWithFormInfo.open(popupWinInfo);
+  popupWithFormInfo.open();
 });
 buttonProfileAdd.addEventListener('click', () => {
   formValidatorAdd.toggleButtonState();
-  popupWithFormAdd.open(popupWinAdd);
+  popupWithFormAdd.open();
 });
 
 popupWithFormInfo.setEventListeners();
 popupWithFormAdd.setEventListeners();
 
 //отрисовка галереи
+const popupWithImg = new PopupWithImage ({ popupSelector: '.popupImg' });
 function getCard (link, title) {
   return new Card ({
       openImg: ( itemSrc, itemText) => {
-        const popupWithImg = new PopupWithImage (popupWinImg);
+        
         popupWithImg.open( itemSrc, itemText);
+        popupWithImg.setEventListeners();
       }
     },
-    link, title
+    link, title, '#foto'
   ).createCard();
 };
 
@@ -82,6 +85,7 @@ const gallery = new Section ({
     items: initialCards,
     renderer: (item) => {
       const galleryElement = getCard(item.link, item.name);
+      //console.log(galleryElement);
       gallery.addItem(galleryElement);
     }
   }, '.element');

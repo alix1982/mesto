@@ -1,13 +1,14 @@
 export class Card {
   constructor ({ 
       openImg
-    }, itemSrc, itemText
+    }, itemSrc, itemText, templateSelector
+
   ) 
   {
     this._itemSrc = itemSrc;
     this._itemText = itemText;
     this.openImg = openImg;
-    this._cardTemplate = document.querySelector('#foto').content;
+    this._cardTemplate = document.querySelector(templateSelector).content;
     this._cardOnline = this._cardTemplate.querySelector('.element__list').cloneNode(true);
   }
   
@@ -33,6 +34,12 @@ export class Card {
       this.openImg ( this._itemSrc, this._itemText);
     });
   };
+
+  _setEventListeners () {
+    this._likeCard ();
+    this._deleteCard ();
+    this._openImage();
+  };
   
   createCard () {
     this._elementImg = this._cardOnline.querySelector('.element__img');
@@ -40,9 +47,7 @@ export class Card {
     this._elementLike = this._cardOnline.querySelector('.element__like');
     this._elementDel = this._cardOnline.querySelector('.element__del');
     this._getCard();
-    this._likeCard ();
-    this._deleteCard ();
-    this._openImage();
+    this._setEventListeners ();
     return this._cardOnline;
   };
 };
