@@ -1,9 +1,5 @@
 export class Card {
-  constructor ({ 
-      openImg
-    }, itemSrc, itemText, templateSelector
-
-  ) 
+  constructor ({ openImg }, itemSrc, itemText, templateSelector)
   {
     this._itemSrc = itemSrc;
     this._itemText = itemText;
@@ -21,24 +17,17 @@ export class Card {
   _like = () => {
     this._elementLike.classList.toggle('element__like_active');
   };
-  _likeCard () {this._elementLike.addEventListener('click', this._like)};
-
   _del = () => {
     this._cardOnline.remove();
     this._cardOnline = null;
   };
-  _deleteCard () {this._elementDel.addEventListener('click', this._del)};
-
-  _openImage = () => {
+  
+  _setEventListeners () {
+    this._elementLike.addEventListener('click', this._like);
+    this._elementDel.addEventListener('click', this._del)
     this._elementImg.addEventListener('click', () => {
       this.openImg ( this._itemSrc, this._itemText);
     });
-  };
-
-  _setEventListeners () {
-    this._likeCard ();
-    this._deleteCard ();
-    this._openImage();
   };
   
   createCard () {

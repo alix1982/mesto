@@ -6,7 +6,7 @@ export class UserInfo {
     }
     
     getUserInfo = () => {
-      return this.dataInfo = {name: this.name.textContent, work: this.work.textContent};
+      return {name: this.name.textContent, work: this.work.textContent};
     };
     
     setUserInfo = (inputList) => {

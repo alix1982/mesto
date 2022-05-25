@@ -1,12 +1,11 @@
 import '../pages/index.css';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
-import {initialCards} from '../components/data.js';
+import {initialCards} from '../utils/data.js';
 import {Section} from '../components/Section.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
-//  import { data } from 'autoprefixer';
 
 const obj = {
   formSelector: '.form',
@@ -15,9 +14,7 @@ const obj = {
   inactiveButtonClass: 'form__save_disable',
   inputErrorClass: 'form__text_error',
   errorClass: 'form__message-error'
-}
-
-const element = document.querySelector('.element');
+};
 
 //Info
 const inputInfoName = document.querySelector('.formInfo__text_name');
@@ -37,23 +34,16 @@ const formValidatorInfo = new FormValidator (obj, formInfo);
 const popupWithFormAdd = new PopupWithForm({
   popupSelector: '.popupAdd',
   handlerSubmit: (inputList) => {
-    const card = new Section ({
-      items: inputList,
-       renderer: () => {}
-    }, '.element');
-    card.addItem(getCard(inputList.link, inputList.title));
+    gallery.addItem(getCard(inputList.link, inputList.title));
   }
 });
 const formAdd = document.querySelector('.formAdd');
 const buttonProfileAdd = document.querySelector('.profile__add-button');
 const formValidatorAdd = new FormValidator (obj, formAdd);
 
-//
+//открытие попапов Info и Add (валидация и слушатели)
 buttonProfileInfo.addEventListener('click',  () => {
   const dataInfo = userInfo.getUserInfo();
-  // const inputList = dataInfo;
-  // console.log(inputListI);
-  // console.log(dataInfo);
   inputInfoName.value = dataInfo.name;
   inputInfoWork.value = dataInfo.work;
   formValidatorInfo.toggleButtonState();
@@ -63,18 +53,16 @@ buttonProfileAdd.addEventListener('click', () => {
   formValidatorAdd.toggleButtonState();
   popupWithFormAdd.open();
 });
-
 popupWithFormInfo.setEventListeners();
 popupWithFormAdd.setEventListeners();
 
 //отрисовка галереи
 const popupWithImg = new PopupWithImage ({ popupSelector: '.popupImg' });
+popupWithImg.setEventListeners();
 function getCard (link, title) {
   return new Card ({
       openImg: ( itemSrc, itemText) => {
-        
         popupWithImg.open( itemSrc, itemText);
-        popupWithImg.setEventListeners();
       }
     },
     link, title, '#foto'
@@ -85,7 +73,6 @@ const gallery = new Section ({
     items: initialCards,
     renderer: (item) => {
       const galleryElement = getCard(item.link, item.name);
-      //console.log(galleryElement);
       gallery.addItem(galleryElement);
     }
   }, '.element');
