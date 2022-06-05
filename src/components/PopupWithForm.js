@@ -17,17 +17,20 @@ export class PopupWithForm extends Popup{
       });
       return this._formValues;
     };
-    
+
     setEventListeners = () => {
       super.setEventListeners();
       this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
         this.handlerSubmit(this._getInputValues ());
-        this.close();
+        //this.close();
       });
     };
+
     close () {
       super.close();
       this._form.reset();
     };
 }
+
+

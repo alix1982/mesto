@@ -1,13 +1,15 @@
 .element__like {
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   width: 22px;
-  height: 19px;
+  height: 35px;
   padding: 0;
   transition: 0.3s;
   background-image: url('../../../images/element-like.svg');
   background-color: #ffffff;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   border: none;
 }
 
@@ -15,4 +17,3 @@
   opacity: 0.5;
   cursor: pointer;
 }
-

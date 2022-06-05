@@ -17,8 +17,11 @@
     
     <main class="content">
       <section class="profile" aria-label="профиль">
-        <img src="<%=require('./images/avatar.png')%>" class="profile__avatar" alt="аватар">
-        <!-- <img src="./images/avatar.png" class="profile__avatar" alt="аватар"> -->
+        <button class="profile__avatar-button profile__avatar-overlay" type="button">
+          <img src="<%=require('./images/avatar.png')%>" class="profile__avatar" alt="аватар">
+          <!-- <img src="./images/avatar.png" class="profile__avatar" alt="аватар"> -->
+          
+        </button>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__info-button" type="button">
@@ -36,11 +39,13 @@
         </ul>
         <template id="foto">
             <li class="element__list">
-              <img class="element__img" alt="фото">
+              <img class="element__img" alt="фото" id="">
               <button class="element__del" type="button"></button>
               <div class="element__item">
                 <p class="element__text"></p>
-                <button class="element__like" type="button"></button>
+                <button class="element__like" type="button">
+                  <p class="element__like_counter">9</p>
+                </button>
               </div>
             </li>
           </template>
@@ -96,6 +101,33 @@
       <p class="popupImg__text">Нечто</p>
     </div>
   </section>
-  <!-- <script src="pages/index.js" type="module"></script> -->
+
+  <section class="popup popupDel">
+    <div class="popupDel__cell">
+      <button class="popup__close" type="button">
+      </button>
+        <h2 class="popupDel__heading">Вы уверены?</h2>
+        <button class="popupDel__save" type="submit">
+            да
+        </button>
+      </div>
+  </section>
+
+  <section class="popup popupAvatar">
+    <div class="popupAvatar__cell">
+      <button class="popup__close" type="button">
+      </button>
+      <form class="form formAvatar" name="form" novalidate>
+        <h2 class="popupAvatar__heading">Обновить аватар</h2>
+        <input id="link-input-avatar" class="form__text formAvatar__text formAvatar__text_link" type="url" name="linkAvatar" placeholder="Ссылка на аватар" required>
+        <span class="link-input-avatar-error form__message-error"> </span>
+        <button class="form__save formAvatar__save" type="submit">
+            Сохранить
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <script src="pages/index.js" type="module"></script>
 </body>
 </html>

@@ -13,4 +13,6 @@ export class UserInfo {
       this.name.textContent = inputList.name;
       this.work.textContent = inputList.work;
     };
+    
 }
+

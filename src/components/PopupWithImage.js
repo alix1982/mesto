@@ -14,3 +14,4 @@ export class PopupWithImage extends Popup{
   };
 }
 
+
