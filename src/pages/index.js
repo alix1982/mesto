@@ -18,89 +18,101 @@ const obj = {
   errorClass: 'form__message-error'
 };
 
+const api = new Api (
+  {
+    heading: {
+      authorization: '99b7a38f-d2ab-46ce-b602-198a4e9299a5',
+      'Content-Type': 'application/json'
+    }
+  }
+);
+
 //Info
 const inputInfoName = document.querySelector('.formInfo__text_name');
 const inputInfoWork = document.querySelector('.formInfo__text_work');
-const userInfo = new UserInfo ({name:'.profile__name', work:'.profile__work'});
+const userInfo = new UserInfo ({name:'.profile__name', work:'.profile__work', avatar:'.profile__avatar'});
 const formInfo = document.querySelector('.formInfo');
 const buttonProfileInfo = document.querySelector('.profile__info-button');
-const formInfoButtonSave = document.querySelector('.formInfo__save');
 const formValidatorInfo = new FormValidator (obj, formInfo);
-
-const apiUserInfo = new Api (
-  {
-    render: () => {},
-    renderClose: () => {popupWithFormInfo.close()}
-  }
-  );
-
 const popupWithFormInfo = new PopupWithForm({
   popupSelector: '.popupInfo',
   handlerSubmit: (inputList) => {
     userInfo.setUserInfo(inputList);
-    formInfoButtonSave.textContent = 'Сохранение ...';
-    apiUserInfo.getUserInfo(inputList);
-  }
+    popupWithFormInfo.editTextButton();
+    api.patchUserInfo('https://mesto.nomoreparties.co/v1/cohort-42/users/me', inputList)
+      .then (() => {popupWithFormInfo.close()})
+      .finally (() => {
+          popupWithFormInfo.restoreTextButton('Сохранить');
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  },
 });
-
 
 //Add
 const formAdd = document.querySelector('.formAdd');
 const buttonProfileAdd = document.querySelector('.profile__add-button');
 const formValidatorAdd = new FormValidator (obj, formAdd);
-const formAddButtonSave = document.querySelector('.formAdd__save');
-
-const apiAddCard = new Api (
-  {
-    render: (inputList, result) => {section().addItem(getCard(inputList.link, inputList.title, 0, result._id))},
-    renderClose: () => {popupWithFormAdd.close()}
-  }
-);
-
 const popupWithFormAdd = new PopupWithForm({
   popupSelector: '.popupAdd',
   handlerSubmit: (inputList) => {
-    formAddButtonSave.textContent = 'Сохранение ...';
-    apiAddCard.getAddCard(inputList)
+    popupWithFormAdd.editTextButton();
+    api.postAddCard('https://mesto.nomoreparties.co/v1/cohort-42/cards', inputList)
+      .then((result) => {
+        const elementCard = {
+          link: inputList.link,
+          name: inputList.title,
+          likes: [],
+          _id: result._id,
+          owner: {_id: 0}
+        };
+        section().addItem(getCard(elementCard))
+        popupWithFormAdd.close();
+      })
+      .finally (() => {
+        popupWithFormAdd.restoreTextButton('Создать');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 });
 
 //avatar
-const elementAvatar = document.querySelector('.profile__avatar');
 const formAvatar = document.querySelector('.formAvatar');
 const buttonProfileAvatar = document.querySelector('.profile__avatar-button');
 const formValidatorAvatar = new FormValidator(obj, formAvatar);
-const formAvatarButtonSave = document.querySelector('.formAvatar__save');
-
-const apiUserAvatar = new Api (
-  {
-    render: () => {},
-    renderClose: () => {popupWithFormAvatar.close()}
-  }
-);
-
 const popupWithFormAvatar = new PopupWithForm({
   popupSelector: '.popupAvatar',
   handlerSubmit: (inputList) => {
-    elementAvatar.src = inputList.linkAvatar;
-    formAvatarButtonSave.textContent = 'Сохранение ...';
-    apiUserAvatar.getUserAvatar(inputList);
+    userInfo.setUserAvatar(inputList);
+    popupWithFormAvatar.editTextButton();
+    api.patchUserAvatar('https://mesto.nomoreparties.co/v1/cohort-42/users/me/avatar', inputList)
+    .then (() => {popupWithFormAvatar.close()})
+      .finally (() => {
+        popupWithFormAvatar.restoreTextButton('Сохранить');
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 });
 
 //card Delete
-const formDelete = document.querySelector('.popupDel__cell');
-const buttonPopupDel = document.querySelector('.popupDel__save');
-
-const apiCardDel = new Api (
-  {render: () => {}}
-);
-
 const popupDel = new PopupWithDel ({
   popupSelector: '.popupDel', 
-  cardDelete: (imgCard) => {
-    apiCardDel.getCardDel(imgCard, 'DELETE');
-    popupDel.close();
+  cardDelete: (imgCard, cardElement) => {
+    api.deleteCardDel('https://mesto.nomoreparties.co/v1/cohort-42/cards/', imgCard, 'DELETE')
+      .then (() => {
+        popupDel.cardDel
+        cardElement.remove();
+        cardElement = null;
+        popupDel.close();
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 });
 
@@ -108,7 +120,6 @@ popupDel.setEventListeners();
 
 //открытие попапов Info, Add и Avatar (валидация и слушатели)
 buttonProfileInfo.addEventListener('click',  () => {
-  formInfoButtonSave.textContent = 'Сохранить';
   const dataInfo = userInfo.getUserInfo();
   inputInfoName.value = dataInfo.name;
   inputInfoWork.value = dataInfo.work;
@@ -116,12 +127,10 @@ buttonProfileInfo.addEventListener('click',  () => {
   popupWithFormInfo.open();
 });
 buttonProfileAdd.addEventListener('click', () => {
-  formAddButtonSave.textContent = 'Создать';
   formValidatorAdd.toggleButtonState();
   popupWithFormAdd.open();
 });
 buttonProfileAvatar.addEventListener('click', () => {
-  formAvatarButtonSave.textContent = 'Сохранить';
   formValidatorAvatar.toggleButtonState();
   popupWithFormAvatar.open();
 });
@@ -129,26 +138,23 @@ popupWithFormInfo.setEventListeners();
 popupWithFormAdd.setEventListeners();
 popupWithFormAvatar.setEventListeners();
 
-
 //открытие попапа просмотра карточки(слушатели)
 const popupWithImg = new PopupWithImage ({ popupSelector: '.popupImg' });
 popupWithImg.setEventListeners();
 
 //для создание карточки
-function getCard (link, title, counter, id) {
-  const apiCounterLike = new Api (
-    {render: () => {}}
-  );
-
+function getCard (element) {
   const card = new Card ({
     openImg: ( itemSrc, itemText) => {popupWithImg.open( itemSrc, itemText)},
-    openPopupDel: (cardElement) => {
+    openPopupDel: (elementImg, cardElement) => {
       popupDel.open();
-      popupDel.element(cardElement)
+      popupDel.addTextButton();
+      popupDel.getElement(elementImg, cardElement);
     },
-    countLikes: (elementImg, method) => {apiCounterLike.getCounterLike(elementImg, method)}
+    countLikes: (elementImg, method) => {return api.getCounterLike('https://mesto.nomoreparties.co/v1/cohort-42/cards/', elementImg, method)},
+    getIdUser: () => {return api.getUser('https://nomoreparties.co/v1/cohort-42/users/me')}
   },
-  link, title, counter, id, '#foto');
+  element, '#foto');
 
   return card.createCard();
 };
@@ -158,27 +164,41 @@ function section (cards) {
   const gallery = new Section ({
     items: cards,
     renderer: (item) => {
-      const galleryElement = getCard(item.link, item.name, item.likes.length, item._id);
+      const galleryElement = getCard(item);
       gallery.addItem(galleryElement);
-    }
+    },
+    getArrayCard: () => {return api.getCards('https://mesto.nomoreparties.co/v1/cohort-42/cards')}
   }, '.element');
   return gallery;
 }
-
-//отрисовка галереи
-const apiCards = new Api (
-  {render: (result) => {section (result).renderItems();}}
-  );
-
-apiCards.getCards();
 
 //валидация форм
 formValidatorInfo.enableValidation ();
 formValidatorAdd.enableValidation ();
 formValidatorAvatar.enableValidation ();
 
+
+
 //данные пользователя с сервера
-const apiUser = new Api (
-  {render: () => {}}
-  );
-apiUser.getUser();
+api.getUser('https://nomoreparties.co/v1/cohort-42/users/me')
+  .then((result) => {
+    const info = {
+      name: result.name,
+      work: result.about
+    };
+    const avatar = {linkAvatar: result.avatar}
+    userInfo.setUserInfo(info);
+    userInfo.setUserAvatar(avatar);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+//отрисовка галереи
+Promise.all([ api.getUser('https://nomoreparties.co/v1/cohort-42/users/me'), api.getCards('https://mesto.nomoreparties.co/v1/cohort-42/cards') ])
+  .then (() => {
+    section().renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  })
