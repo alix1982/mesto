@@ -1,9 +1,10 @@
 export class Api {
   constructor (
-      {heading}
+      {url, heading}
       )
   {
-     this.heading = heading
+    this.url = url;
+    this.heading = heading
   }
 
   _getStatus = (res) => {
@@ -13,8 +14,8 @@ export class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   };
 
-  patchUserInfo = (url, inputList) => {
-    return (fetch(url, {
+  patchUserInfo = (inputList) => {
+    return (fetch(`${this.url}/users/me`, {
         method: 'PATCH',
         headers: this.heading,
         body: JSON.stringify({
@@ -26,8 +27,8 @@ export class Api {
     );
   }
 
-  postAddCard = (url, inputList) => {
-    return (fetch(url, {
+  postAddCard = (inputList) => {
+    return (fetch(`${this.url}/cards`, {
       method: 'POST',
       headers: this.heading,
       body: JSON.stringify({
@@ -39,8 +40,8 @@ export class Api {
     )
   };
 
-  patchUserAvatar = (url, inputList) => {
-    return (fetch(url, {
+  patchUserAvatar = (inputList) => {
+    return (fetch(`${this.url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this.heading,
        body: JSON.stringify({
@@ -51,8 +52,8 @@ export class Api {
     )
   }
 
-  deleteCardDel = (url, imgCard, method) => {
-    return (fetch (url +`${imgCard.id}`, {
+  deleteCardDel = (itemId, method) => {
+    return (fetch (`${this.url}/cards/${itemId}`, {
         method: method,
         headers: this.heading,
       })
@@ -60,8 +61,8 @@ export class Api {
     )
   }
 
-  getCounterLike = (url, elementImg, method) => {
-    return (fetch(url + `${elementImg.id}/likes`, {
+  getCounterLike = (itemId, method) => {
+    return (fetch(`${this.url}/cards/${itemId}/likes`, {
       method: method,
       headers: this.heading,
       body: JSON.stringify({
@@ -71,8 +72,8 @@ export class Api {
     )
   }
 
-  getCards = (url) => {
-    return (fetch(url, {
+  getCards = () => {
+    return (fetch(`${this.url}/cards`, {
       method: 'GET',
       headers: this.heading
     })
@@ -80,8 +81,8 @@ export class Api {
     ); 
   }
 
-  getUser = (url) => {
-    return (fetch(url, {
+  getUser = () => {
+    return (fetch(`${this.url}/users/me`, {
       method: 'GET',
       headers: this.heading
     })

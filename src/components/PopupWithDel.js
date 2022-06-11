@@ -6,26 +6,25 @@ export class PopupWithDel extends Popup{
       super (popupSelector);
       this._form = this.popupElement.querySelector('.form');
       this.cardDelete = cardDelete;
-      //колбек
       this.buttonPopupDel = this.popupElement.querySelector('.popupDel__save');
     }
     
     addTextButton = () => {
       this.buttonPopupDel.textContent = "Да"
     }
-  
-    getElement = (elementImg, cardElement) => {
-      this.elementImg = elementImg;
+
+    getElement = (itemId, cardElement) => {
+      this.itemId = itemId;
       this.cardElement = cardElement
     }
 
     setEventListeners = () => {
       super.setEventListeners();
-      this.getElement();
       this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
         this.buttonPopupDel.textContent = "Удаление...";
-        this.cardDelete(this.elementImg, this.cardElement);
+        this.cardDelete(this.itemId, this.cardElement);
       });
     }
 }
+

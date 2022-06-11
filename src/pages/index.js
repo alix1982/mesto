@@ -1,7 +1,6 @@
 import '../pages/index.css';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
-//import {initialCards} from '../utils/data.js';
 import {Section} from '../components/Section.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
@@ -20,6 +19,7 @@ const obj = {
 
 const api = new Api (
   {
+    url: 'https://mesto.nomoreparties.co/v1/cohort-42',
     heading: {
       authorization: '99b7a38f-d2ab-46ce-b602-198a4e9299a5',
       'Content-Type': 'application/json'
@@ -37,10 +37,12 @@ const formValidatorInfo = new FormValidator (obj, formInfo);
 const popupWithFormInfo = new PopupWithForm({
   popupSelector: '.popupInfo',
   handlerSubmit: (inputList) => {
-    userInfo.setUserInfo(inputList);
     popupWithFormInfo.editTextButton();
-    api.patchUserInfo('https://mesto.nomoreparties.co/v1/cohort-42/users/me', inputList)
-      .then (() => {popupWithFormInfo.close()})
+    api.patchUserInfo (inputList)
+      .then (() => {
+        userInfo.setUserInfo (inputList);
+        popupWithFormInfo.close()
+      })
       .finally (() => {
           popupWithFormInfo.restoreTextButton('Сохранить');
         })
@@ -58,16 +60,9 @@ const popupWithFormAdd = new PopupWithForm({
   popupSelector: '.popupAdd',
   handlerSubmit: (inputList) => {
     popupWithFormAdd.editTextButton();
-    api.postAddCard('https://mesto.nomoreparties.co/v1/cohort-42/cards', inputList)
+    api.postAddCard(inputList)
       .then((result) => {
-        const elementCard = {
-          link: inputList.link,
-          name: inputList.title,
-          likes: [],
-          _id: result._id,
-          owner: {_id: 0}
-        };
-        section().addItem(getCard(elementCard))
+        section().addItem(getCard(result))
         popupWithFormAdd.close();
       })
       .finally (() => {
@@ -86,10 +81,12 @@ const formValidatorAvatar = new FormValidator(obj, formAvatar);
 const popupWithFormAvatar = new PopupWithForm({
   popupSelector: '.popupAvatar',
   handlerSubmit: (inputList) => {
-    userInfo.setUserAvatar(inputList);
     popupWithFormAvatar.editTextButton();
-    api.patchUserAvatar('https://mesto.nomoreparties.co/v1/cohort-42/users/me/avatar', inputList)
-    .then (() => {popupWithFormAvatar.close()})
+    api.patchUserAvatar(inputList)
+      .then (() => {
+        popupWithFormAvatar.close();
+        userInfo.setUserAvatar(inputList);
+      })
       .finally (() => {
         popupWithFormAvatar.restoreTextButton('Сохранить');
       })
@@ -102,10 +99,9 @@ const popupWithFormAvatar = new PopupWithForm({
 //card Delete
 const popupDel = new PopupWithDel ({
   popupSelector: '.popupDel', 
-  cardDelete: (imgCard, cardElement) => {
-    api.deleteCardDel('https://mesto.nomoreparties.co/v1/cohort-42/cards/', imgCard, 'DELETE')
+  cardDelete: (itemId, cardElement) => {
+    api.deleteCardDel(itemId, 'DELETE')
       .then (() => {
-        popupDel.cardDel
         cardElement.remove();
         cardElement = null;
         popupDel.close();
@@ -146,28 +142,33 @@ popupWithImg.setEventListeners();
 function getCard (element) {
   const card = new Card ({
     openImg: ( itemSrc, itemText) => {popupWithImg.open( itemSrc, itemText)},
-    openPopupDel: (elementImg, cardElement) => {
+    openPopupDel: (cardElement) => {
       popupDel.open();
       popupDel.addTextButton();
-      popupDel.getElement(elementImg, cardElement);
+      popupDel.getElement(card.element._id, cardElement);
     },
-    countLikes: (elementImg, method) => {return api.getCounterLike('https://mesto.nomoreparties.co/v1/cohort-42/cards/', elementImg, method)},
-    getIdUser: () => {return api.getUser('https://nomoreparties.co/v1/cohort-42/users/me')}
+    toggleLike: (itemId, method) => {
+      api.getCounterLike(itemId, method)
+        .then (() => {
+          card.addLike()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   },
-  element, '#foto');
+  element, user, '#foto');
 
   return card.createCard();
 };
 
 //для отрисовки галереи
-function section (cards) {
+function section () {
   const gallery = new Section ({
-    items: cards,
     renderer: (item) => {
       const galleryElement = getCard(item);
       gallery.addItem(galleryElement);
-    },
-    getArrayCard: () => {return api.getCards('https://mesto.nomoreparties.co/v1/cohort-42/cards')}
+    }
   }, '.element');
   return gallery;
 }
@@ -177,28 +178,22 @@ formValidatorInfo.enableValidation ();
 formValidatorAdd.enableValidation ();
 formValidatorAvatar.enableValidation ();
 
+let user = null;
 
-
-//данные пользователя с сервера
-api.getUser('https://nomoreparties.co/v1/cohort-42/users/me')
-  .then((result) => {
+//получение и отрисовкаданных пользователя и галереи
+Promise.all([ api.getUser(), api.getCards() ])
+  .then(([resultUser, resultCards]) => {
+    user = resultUser;
     const info = {
-      name: result.name,
-      work: result.about
+      name: resultUser.name,
+      work: resultUser.about
     };
-    const avatar = {linkAvatar: result.avatar}
+    const avatar = {linkAvatar: resultUser.avatar}
     userInfo.setUserInfo(info);
     userInfo.setUserAvatar(avatar);
+    section().renderItems(resultCards);
   })
   .catch((err) => {
     console.log(err);
   })
 
-//отрисовка галереи
-Promise.all([ api.getUser('https://nomoreparties.co/v1/cohort-42/users/me'), api.getCards('https://mesto.nomoreparties.co/v1/cohort-42/cards') ])
-  .then (() => {
-    section().renderItems();
-  })
-  .catch((err) => {
-    console.log(err);
-  })
