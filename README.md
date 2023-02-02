@@ -9,4 +9,4 @@
 
 
  
- [Ссылка на проект](https://alix1982.github.io/mesto/index.html)
+ [Ссылка на проект](https://alix1982.github.io/mesto)
