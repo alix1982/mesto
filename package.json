@@ -1,7 +1,7 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "1. Создание индивидуальной фотогалереи с использованием языка програмирования Java Script",
+  "description": "Создание индивидуальной фотогалереи с использованием языка програмирования Java Script",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
